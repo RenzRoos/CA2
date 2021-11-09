@@ -8,7 +8,7 @@
 #include "stages.h"
 
 #include <iostream>
-
+ 
 
 /*
  * Instruction fetch
@@ -22,12 +22,9 @@ InstructionFetchStage::propagate()
     {
       instructionMemory.setAddress(PC);
       instructionMemory.setSize(4);
-
-#if 0
-      /* Enable this once you have implemented instruction fetch. */
-      if (instructionWord == TestEndMarker)
-        throw TestEndMarkerEncountered(PC);
-#endif
+      if_id.PC = instructionMemory.getValue();
+     // if (instructionWord == TestEndMarker)
+       // throw TestEndMarkerEncountered(PC);
     }
   catch (TestEndMarkerEncountered &e)
     {
@@ -57,7 +54,7 @@ dump_instruction(std::ostream &os, const uint32_t instructionWord,
 void
 InstructionDecodeStage::propagate()
 {
-  /* TODO: set instruction word on the instruction decoder */
+  decoder.getInstructionWord();
 
   /* TODO: need a control signals class that generates control
    * signals from a given opcode and function code.

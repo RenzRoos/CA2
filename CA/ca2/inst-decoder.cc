@@ -52,3 +52,11 @@ InstructionDecoder::getRD() const
 
   return 0; /* result undefined */
 }
+
+RegNumber
+InstructionDecoder::getOpcode() const
+{
+
+  return (instructionWord & 0x7f); 
+
+}

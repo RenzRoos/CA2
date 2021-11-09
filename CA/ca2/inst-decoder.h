@@ -43,6 +43,7 @@ class InstructionDecoder
     RegNumber           getRS1() const;
     RegNumber           getRS2() const;
     RegNumber           getRD() const;
+    RegNumber           getOpcode() const;
 
     /* TODO: probably want methods to get opcode, function code */
 
