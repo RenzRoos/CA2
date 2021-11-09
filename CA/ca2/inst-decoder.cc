@@ -32,31 +32,97 @@ InstructionDecoder::getInstructionWord() const
 RegNumber
 InstructionDecoder::getRS1() const
 {
-  /* TODO: implement */
-
+  if(type == R_type || type == I_type || type == S_type || type == B_type){
+    return (instructionWord & 0xf8000); 
+  }
   return 0;  /* result undefined */
 }
 
 RegNumber
 InstructionDecoder::getRS2() const
 {
-  /* TODO: implement */
-
+  if(type == R_type || type == S_type || type == B_type){
+    return (instructionWord & 0x1f00000); 
+  }
   return 0;  /* result undefined */
 }
 
 RegNumber
 InstructionDecoder::getRD() const
 {
-  /* TODO: implement */
-
+  if(type == R_type || type == I_type || type == U_type || type == J_type){
+    return (instructionWord & 0xf80); 
+  }
   return 0; /* result undefined */
 }
 
 RegNumber
-InstructionDecoder::getOpcode() const
+InstructionDecoder::getFunc3() const
 {
+  if(type == R_type || type == I_type || type == S_type || type == B_type){
+    return (instructionWord & 0x7000); 
+  }
+  return 0;
+}
 
+RegNumber
+InstructionDecoder::getFunc7() const
+{
+  if(type == R_type){
+    return (instructionWord & 0xfe000000); 
+  }
+  
+  return 0;
+}
+
+void
+InstructionDecoder::setType(const uint32_t inst_typing){
+
+  switch (inst_typing)
+  {
+    case R1:
+    case R2:
+    case R3:
+      this->type = R_type;
+      break;
+    case I1:
+    case I2:
+    case I3:
+    case I4:
+    case I5:
+      this->type = I_type;
+      break;
+    case S:
+      this->type = S_type;
+      break;
+    case B:
+      this->type = B_type;
+      break;
+    case U1:
+    case U2:
+      this->type = U_type;
+      break;
+    case J:
+      this->type = J_type;
+      break;
+  default:
+    break;
+  }
+} 
+
+RegNumber
+InstructionDecoder::getType() const
+{
+  return this->type; 
+}
+
+
+RegNumber
+InstructionDecoder::getOpcode() 
+{
+  setType(instructionWord & 0x7f);
   return (instructionWord & 0x7f); 
 
 }
+
+
