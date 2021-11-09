@@ -75,6 +75,40 @@ InstructionDecoder::getFunc7() const
   return 0;
 }
 
+RegNumber
+InstructionDecoder::getImm_I_U_J() const
+{
+  if(type == I_type){
+    return (instructionWord & 0xfff0000000); 
+  }
+  else if(type == U_type || type == J_type){
+    return (instructionWord & 0xfffffff000); 
+  }
+  
+  return 0;
+}
+
+
+RegNumber
+InstructionDecoder::getImm1_S_B() const
+{
+  if(type == S_type || type == B_type){
+    return (instructionWord & 0xfe00000000); 
+  }
+  
+  return 0;
+}
+
+RegNumber
+InstructionDecoder::getImm2_S_B() const
+{
+  if(type == S_type || type == B_type){
+    return (instructionWord & 0xf80); 
+  }
+  
+  return 0;
+}
+
 void
 InstructionDecoder::setType(const uint32_t inst_typing){
 

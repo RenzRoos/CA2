@@ -70,6 +70,9 @@ class InstructionDecoder
     RegNumber           getRD() const;
     RegNumber           getFunc3() const;
     RegNumber           getFunc7() const;
+    RegNumber           getImm_I_U_J() const;
+    RegNumber           getImm1_S_B() const;
+    RegNumber           getImm2_S_B() const;
     RegNumber           getOpcode();
 
     void                setType(const uint32_t inst_typing);
